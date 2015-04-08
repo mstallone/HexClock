@@ -1,4 +1,4 @@
-    <!doctype html>
+<!doctype html>
 <html class="no-js" lang="en">
     <head>
         <meta charset="utf-8" />
@@ -17,6 +17,7 @@
     
         <script src="bower_components/jquery/dist/jquery.min.js"></script>
         <script src="bower_components/foundation/js/foundation.min.js"></script>
+        <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
         <script src="js/app.js"></script>
         <script>
             window.setInterval(function(){
@@ -29,12 +30,18 @@
                 var green = Math.round(minute * 4.25).toString(16);
                 var blue = Math.round(second * 4.25).toString(16);
                 
-                $("body").css("background-color", "#" + red + green + blue);
-                
                 if(hour < 10) hour = "0" + hour;   
                 if(minute < 10) minute = "0" + minute;   
-                if(second < 10) second = "0" + second;   
+                if(second < 10) second = "0" + second; 
                 
+                if(red.length < 2) red = "0" + red;   
+                if(green.length < 2) green = "0" + green;   
+                if(blue.length < 2) blue = "0" + blue; 
+                
+                $("body").animate({
+                    backgroundColor: "#" + red + green + blue
+                }, 0);
+                           
                 $("#time").text(hour + ":" + minute + ":" + second);
                 $("#hex").text("#" + red + green + blue);
             }, 50);
