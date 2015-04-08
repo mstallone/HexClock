@@ -1,0 +1,43 @@
+    <!doctype html>
+<html class="no-js" lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Hex Clock</title>
+        <link rel="stylesheet" href="stylesheets/app.css" />
+        <script src="bower_components/modernizr/modernizr.js"></script>
+    </head>
+    <body>
+        <div style="padding-top:2em; font-size:6em; text-align: center; font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;" id="time">
+            1:12:56
+        </div>
+        <div style="padding-top:0em; font-size:1.5em; text-align: center; font-family: 'HelveticaNeue-Light', 'Helvetica Neue Light', 'Helvetica Neue', Helvetica, Arial, 'Lucida Grande', sans-serif;" id="hex">
+            #34217A
+        </div>
+    
+        <script src="bower_components/jquery/dist/jquery.min.js"></script>
+        <script src="bower_components/foundation/js/foundation.min.js"></script>
+        <script src="js/app.js"></script>
+        <script>
+            window.setInterval(function(){
+                var time = new Date();
+                var hour = time.getHours();
+                var minute = time.getMinutes();
+                var second = time.getSeconds();
+                
+                var red = Math.round(hour * 10.625).toString(16);
+                var green = Math.round(minute * 4.25).toString(16);
+                var blue = Math.round(second * 4.25).toString(16);
+                
+                $("body").css("background-color", "#" + red + green + blue);
+                
+                if(hour < 10) hour = "0" + hour;   
+                if(minute < 10) minute = "0" + minute;   
+                if(second < 10) second = "0" + second;   
+                
+                $("#time").text(hour + ":" + minute + ":" + second);
+                $("#hex").text("#" + red + green + blue);
+            }, 50);
+        </script>
+    </body>
+</html>
